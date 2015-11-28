@@ -2,8 +2,8 @@
 export DEBIAN_FRONTEND=noninteractive
 
 # Freshen package index
-apt-get update
-apt-get upgrade
+sudo apt-get update
+sudo apt-get upgrade
 
 # support the precompiled struct_server
 sudo dpkg --add-architecture i386
