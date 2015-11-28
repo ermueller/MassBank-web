@@ -1,14 +1,15 @@
 # install a MassBank Dev machine
 export DEBIAN_FRONTEND=noninteractive
 
-# Freshen package index
-sudo apt-get update
-sudo apt-get upgrade
-
 # support the precompiled struct_server
-sudo dpkg --add-architecture i386
-apt-get install -y libgcc1:i386 libstdc++6:i386 libc6-i386 lib32stdc++6
+pkg --add-architecture i386
 
+# Freshen package index and upgrade to recent version
+apt-get update
+apt-get upgrade
+
+# install i386 libs for compatibility
+apt-get install -y libgcc1:i386 libstdc++6:i386 libc6-i386 lib32stdc++6
 
 # Set timezone
 echo "Europe/Berlin" | tee /etc/timezone
@@ -90,9 +91,6 @@ apt-get install -y lynx
 
 # Compiler to install Search.cgi
 apt-get install -y build-essential libmysqlclient-dev
-
-# Install European MassBank specific tools
-apt-get install -y mc xterm mysql-admin mysql-workbench
 
 # download latest version of MassBank
 git clone https://github.com/tsufz/MassBank-web
