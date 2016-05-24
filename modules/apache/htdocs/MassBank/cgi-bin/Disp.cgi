@@ -160,8 +160,11 @@ print << "HTML";
 		<meta name="revisit_after" content="30 days">
 		<meta http-equiv="Content-Style-Type" content="text/css">
 		<meta http-equiv="Content-Script-Type" content="text/javascript">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
 		<link rel="stylesheet" type="text/css" href="../css/Common.css">
+        <link rel="stylesheet" href="../css/ChemDoodleWeb.css" type="text/css">
 		<script type="text/javascript" src="../script/Common.js"></script>
+        <script type="text/javascript" src="../script/ChemDoodleWeb.js"></script>
 		<title>$short_name Mass Spectrum</title>
 	</head>
 	<body style="font-family:Times;">
@@ -447,7 +450,7 @@ if ( -f $gifFile ) {
 }
 else {
 print << "HTML";
-					<applet code="MolVie.class" archive="../applet/MolView.jar" width="200" height="200">
+					<applet code="MolView.class" archive="../applet/MolView.jar" width="200" height="200">
 						<param name="site" value="$src">
 						<param name="compound_name" value="$compound_name[0]">
 					</applet>
