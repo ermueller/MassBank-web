@@ -160,8 +160,11 @@ print << "HTML";
 		<meta name="revisit_after" content="30 days">
 		<meta http-equiv="Content-Style-Type" content="text/css">
 		<meta http-equiv="Content-Script-Type" content="text/javascript">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
 		<link rel="stylesheet" type="text/css" href="../css/Common.css">
+        <link rel="stylesheet" href="../css/ChemDoodleWeb.css" type="text/css">
 		<script type="text/javascript" src="../script/Common.js"></script>
+        <script type="text/javascript" src="../script/ChemDoodleWeb.js"></script>
 		<title>$short_name Mass Spectrum</title>
 	</head>
 	<body style="font-family:Times;">
@@ -406,23 +409,32 @@ if ( $version == 1 ) {
 
 print << "HTML";
 					<br>
-					<applet code="Display.class" archive="../applet/Display2.jar" width="750" height="$height">
-						<param name="id" value="$id">
-						<param name="site" value="$src">
-						<param name="num" value="$mz_num">
+					<script>
+                      var viewACS = new ChemDoodle.ViewerCanvas('viewACS', 100, 100);
+                      viewACS.specs.bonds_width_2D = .6;
+                      viewACS.specs.bonds_saturationWidth_2D = .18;
+                      viewACS.specs.bonds_hashSpacing_2D = 2.5;
+                      viewACS.specs.atoms_font_size_2D = 10;
+                      viewACS.specs.atoms_font_families_2D = ['Helvetica', 'Arial', 'sans-serif'];
+                      viewACS.specs.atoms_displayTerminalCarbonLabels_2D = true;
+                      var caffeineMolFile = 'Molecule Name\n  CHEMDOOD08070920033D 0   0.00000     0.00000     0\n[Insert Comment Here]\n 14 15  0  0  0  0  0  0  0  0  1 V2000\n   -0.3318    2.0000    0.0000   O 0  0  0  1  0  0  0  0  0  0  0  0\n   -0.3318    1.0000    0.0000   C 0  0  0  1  0  0  0  0  0  0  0  0\n   -1.1980    0.5000    0.0000   N 0  0  0  1  0  0  0  0  0  0  0  0\n    0.5342    0.5000    0.0000   C 0  0  0  1  0  0  0  0  0  0  0  0\n   -1.1980   -0.5000    0.0000   C 0  0  0  1  0  0  0  0  0  0  0  0\n   -2.0640    1.0000    0.0000   C 0  0  0  4  0  0  0  0  0  0  0  0\n    1.4804    0.8047    0.0000   N 0  0  0  1  0  0  0  0  0  0  0  0\n    0.5342   -0.5000    0.0000   C 0  0  0  1  0  0  0  0  0  0  0  0\n   -2.0640   -1.0000    0.0000   O 0  0  0  1  0  0  0  0  0  0  0  0\n   -0.3318   -1.0000    0.0000   N 0  0  0  1  0  0  0  0  0  0  0  0\n    2.0640   -0.0000    0.0000   C 0  0  0  2  0  0  0  0  0  0  0  0\n    1.7910    1.7553    0.0000   C 0  0  0  4  0  0  0  0  0  0  0  0\n    1.4804   -0.8047    0.0000   N 0  0  0  1  0  0  0  0  0  0  0  0\n   -0.3318   -2.0000    0.0000   C 0  0  0  4  0  0  0  0  0  0  0  0\n  1  2  2  0  0  0  0\n  3  2  1  0  0  0  0\n  4  2  1  0  0  0  0\n  3  5  1  0  0  0  0\n  3  6  1  0  0  0  0\n  7  4  1  0  0  0  0\n  4  8  2  0  0  0  0\n  9  5  2  0  0  0  0\n 10  5  1  0  0  0  0\n 10  8  1  0  0  0  0\n  7 11  1  0  0  0  0\n  7 12  1  0  0  0  0\n 13  8  1  0  0  0  0\n 13 11  2  0  0  0  0\n 10 14  1  0  0  0  0\nM  END\n> <DATE>\n07-08-2009\n';
+                      var caffeine = ChemDoodle.readMOL(caffeineMolFile);
+                      caffeine.scaleToAverageBondLength(14.4);
+                      viewACS.loadMolecule(caffeine);
+                    </script>
 HTML
 
 if ( $param ne '' ) {
 	print $param;
 }
 if ( $precursor ne '' ) {
-print << "HTML";
-						<param name="precursor" value="$precursor">
-HTML
+# print << "HTML";
+						# <param name="precursor" value="$precursor">
+# HTML
 }
 
 print << "HTML";
-					</applet>
+					
 				</td>
 				<td valign="top">
 					<font style="font-size:10pt;" color="dimgray">Chemical Structure</font><br>
