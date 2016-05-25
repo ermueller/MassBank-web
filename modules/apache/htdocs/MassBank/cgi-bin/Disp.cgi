@@ -407,7 +407,7 @@ if ( $version == 1 ) {
 	}
 }
 
-print << "HTML";
+print << 'HTML';
 					<br>
 					<script>
                       var viewACS = new ChemDoodle.ViewerCanvas('viewACS', 100, 100);
