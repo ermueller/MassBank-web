@@ -422,6 +422,7 @@ print << 'HTML';
                     </div>
                     <script>
                     TESTER = document.getElementById('tester');
+                    </script>
                     Plotly.plot(TESTER, [{
 HTML
 print "x: ["
