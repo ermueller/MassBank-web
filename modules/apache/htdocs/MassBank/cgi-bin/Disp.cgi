@@ -422,10 +422,9 @@ print << 'HTML';
                     </div>
                     <script>
                     TESTER = document.getElementById('tester');
-                    </script>
                     Plotly.plot(TESTER, [{
 HTML
-print "x: ["
+print "x: [";
 $sql = "SELECT MZ FROM PEAK WHERE ID='$id'";
 @ans = &MySql($sql);
 for (my $i=0; $i <= scalar @ans; $i++) {
@@ -436,7 +435,7 @@ for (my $i=0; $i <= scalar @ans; $i++) {
             print ", ";
         }
 }
-print "y: ["
+print "y: [";
 $sql = "SELECT INTENSITY FROM PEAK WHERE ID='$id'";
 @ans = &MySql($sql);
 for (my $i=0; $i <= scalar @ans; $i++) {
