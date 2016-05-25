@@ -408,20 +408,44 @@ if ( $version == 1 ) {
 	}
 }
 
+
+
+$sql = "SELECT INTENSITY FROM PEAK WHERE ID='$id'";
+@ans = &MySql($sql);
+for $item (@ans) {
+		$int_draw .= "$$item[0]@";
+}
+
 print << 'HTML';
 					<br>
 					<div id="tester" style="width:600px;height:250px;">
                     </div>
                     <script>
                     TESTER = document.getElementById('tester');
-
-                    Plotly.plot( TESTER, [{
-                    x: [1, 2, 3, 4, 5],
-                    y: [1, 2, 4, 8, 16] }], { 
-                    margin: { t: 0 } } );
-
-                    </script>
+                    Plotly.plot(TESTER, [{
 HTML
+print "x: ["
+$sql = "SELECT MZ FROM PEAK WHERE ID='$id'";
+@ans = &MySql($sql);
+for (my $i=0; $i <= scalar @ans; $i++) {
+		print "$$item[0]@";
+        if($i == scalar @ans){
+            print "],\n"
+        } else{
+            print ", "
+        }
+}
+print "y: ["
+$sql = "SELECT INTENSITY FROM PEAK WHERE ID='$id'";
+@ans = &MySql($sql);
+for (my $i=0; $i <= scalar @ans; $i++) {
+		print "$$item[0]@";
+        if($i == scalar @ans){
+            print "] }], {\n margin: { t: 0 } } ); </script>"
+        } else{
+            print ", "
+        }
+}
 
 if ( $param ne '' ) {
 	print $param;
