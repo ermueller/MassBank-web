@@ -469,14 +469,12 @@ print << "HTML";
                         viewACS.specs.atoms_displayTerminalCarbonLabels_2D = true;
 
 
-                        ChemDoodle.io.file.content('../DB/molfile/$db_name/$acc.txt', function(fileContent){
+                        ChemDoodle.io.file.content('../DB/molfile/$db_name/$acc.mol', function(fileContent){
                             var recordmolecule = ChemDoodle.readMOL(fileContent);
                             recordmolecule.scaleToAverageBondLength(14.4);
                             viewACS.loadMolecule(recordmolecule);
                         });
                     </script>
-                    #$db_name
-                    #$acc
 HTML
 }
 
