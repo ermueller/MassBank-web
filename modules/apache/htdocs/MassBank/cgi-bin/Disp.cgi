@@ -431,9 +431,9 @@ $sql = "SELECT MZ FROM PEAK WHERE ID='$id'";
 for (my $i=0; $i <= scalar @ans; $i++) {
 		print "$$item[0]@";
         if($i == scalar @ans){
-            print "],\n"
+            print "],\n";
         } else{
-            print ", "
+            print ", ";
         }
 }
 print "y: ["
@@ -442,9 +442,9 @@ $sql = "SELECT INTENSITY FROM PEAK WHERE ID='$id'";
 for (my $i=0; $i <= scalar @ans; $i++) {
 		print "$$item[0]@";
         if($i == scalar @ans){
-            print "] }], {\n margin: { t: 0 } } ); </script>"
+            print "] }], {\n margin: { t: 0 } } ); </script>";
         } else{
-            print ", "
+            print ", ";
         }
 }
 
