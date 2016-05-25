@@ -165,6 +165,7 @@ print << "HTML";
         <link rel="stylesheet" href="../css/ChemDoodleWeb.css" type="text/css">
 		<script type="text/javascript" src="../script/Common.js"></script>
         <script type="text/javascript" src="../script/ChemDoodleWeb.js"></script>
+        <script type="text/javascript" src="../script/plotly-latest.min.js"></script>
 		<title>$short_name Mass Spectrum</title>
 	</head>
 	<body style="font-family:Times;">
