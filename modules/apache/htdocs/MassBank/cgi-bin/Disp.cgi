@@ -408,9 +408,10 @@ if ( $version == 1 ) {
 	}
 }
 
+
 print << 'HTML';
 					<br>
-					<div id="tester" style="width:600px;height:1000px;">
+					<div id="tester" style="width:600px;height:400px;">
                     </div>
                     <script>
                     TESTER = document.getElementById('tester');
@@ -419,9 +420,9 @@ HTML
 print "x: [";
 $sql = "SELECT MZ FROM PEAK WHERE ID='$id'";
 @ans = &MySql($sql);
-for (my $i=0; $i <= scalar @ans; $i++) {
-		print "$$item[0]@";
-        if($i == scalar @ans){
+for (my $i=0; $i < scalar @ans; $i++) {
+		print $ans[$i]->[0];
+        if($i == (scalar @ans -1)){
             print "],\n";
         } else{
             print ", ";
@@ -430,10 +431,10 @@ for (my $i=0; $i <= scalar @ans; $i++) {
 print "y: [";
 $sql = "SELECT INTENSITY FROM PEAK WHERE ID='$id'";
 @ans = &MySql($sql);
-for (my $i=0; $i <= scalar @ans; $i++) {
-		print "$item->[$i]@";
-        if($i == scalar @ans){
-            print "], {\n margin: { t: 1  ); </script>";
+for (my $i=0; $i < scalar @ans; $i++) {
+		print $ans[$i]->[0];
+        if($i == (scalar @ans - 1)){
+            print "],\n type: 'bar',\n orientation: 'v'}],\n {margin: { t: 20}, yaxis: {exponentformat: 'none' }});\n </script>";
         } else{
             print ", ";
         }
