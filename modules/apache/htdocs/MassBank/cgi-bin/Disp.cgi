@@ -125,7 +125,7 @@ while ( <F> ) {
 }
 
 if ( $db_name eq '' ) {
-	$db_name = "MassBank";
+	$db_name = "MssBank";
 }
 open(F, "DB_HOST_NAME");
 while ( <F> ) {
@@ -165,6 +165,7 @@ print << "HTML";
         <link rel="stylesheet" href="../css/ChemDoodleWeb.css" type="text/css">
 		<script type="text/javascript" src="../script/Common.js"></script>
         <script type="text/javascript" src="../script/ChemDoodleWeb.js"></script>
+        <script type="text/javascript" src="../script/plotly-latest.min.js"></script>
 		<title>$short_name Mass Spectrum</title>
 	</head>
 	<body style="font-family:Times;">
@@ -407,25 +408,48 @@ if ( $version == 1 ) {
 	}
 }
 
-print << "HTML";
+print << 'HTML';
 					<br>
-					<applet code="Display.class" archive="../applet/Display2.jar" width="750" height="$height">
-						<param name="id" value="$id">
-						<param name="site" value="$src">
-						<param name="num" value="$mz_num">
+					<div id="tester" style="width:600px;height:1000px;">
+                    </div>
+                    <script>
+                    TESTER = document.getElementById('tester');
+                    Plotly.plot(TESTER, [{
 HTML
+print "x: [";
+$sql = "SELECT MZ FROM PEAK WHERE ID='$id'";
+@ans = &MySql($sql);
+for (my $i=0; $i <= scalar @ans; $i++) {
+		print "$$item[0]@";
+        if($i == scalar @ans){
+            print "],\n";
+        } else{
+            print ", ";
+        }
+}
+print "y: [";
+$sql = "SELECT INTENSITY FROM PEAK WHERE ID='$id'";
+@ans = &MySql($sql);
+for (my $i=0; $i <= scalar @ans; $i++) {
+		print "$item->[$i]@";
+        if($i == scalar @ans){
+            print "], {\n margin: { t: 1  ); </script>";
+        } else{
+            print ", ";
+        }
+}
 
 if ( $param ne '' ) {
 	print $param;
 }
 if ( $precursor ne '' ) {
-print << "HTML";
-						<param name="precursor" value="$precursor">
-HTML
+# print << "HTML";
+						# <param name="precursor" value="$precursor">
+# HTML
 }
 
 print << "HTML";
-					</applet>
+					
 				</td>
 				<td valign="top">
 					<font style="font-size:10pt;" color="dimgray">Chemical Structure</font><br>
@@ -450,10 +474,22 @@ if ( -f $gifFile ) {
 }
 else {
 print << "HTML";
-					<applet code="MolView.class" archive="../applet/MolView.jar" width="200" height="200">
-						<param name="site" value="$src">
-						<param name="compound_name" value="$compound_name[0]">
-					</applet>
+					<script>
+                        var viewACS = new ChemDoodle.ViewerCanvas('viewACS', 100, 100);
+                        viewACS.specs.bonds_width_2D = .6;
+                        viewACS.specs.bonds_saturationWidth_2D = .18;
+                        viewACS.specs.bonds_hashSpacing_2D = 2.5;
+                        viewACS.specs.atoms_font_size_2D = 10;
+                        viewACS.specs.atoms_font_families_2D = ['Helvetica', 'Arial', 'sans-serif'];
+                        viewACS.specs.atoms_displayTerminalCarbonLabels_2D = true;
+
+
+                        ChemDoodle.io.file.content('../DB/molfile/$db_name/$acc.mol', function(fileContent){
+                            var recordmolecule = ChemDoodle.readMOL(fileContent);
+                            recordmolecule.scaleToAverageBondLength(14.4);
+                            viewACS.loadMolecule(recordmolecule);
+                        });
+                    </script>
 HTML
 }
 
