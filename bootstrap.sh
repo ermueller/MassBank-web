@@ -121,6 +121,7 @@ sudo apt-get install -y r-base-core
 sudo apt-get install -y openbabel
 
 bash ./install-ubuntu.sh
+bash ./installChemdoodle.sh
 sudo mv robots.txt /var/www/html/
 sudo mv stats.css /var/www/html/
 IFS='<';echo $(sed '$i0 0   * * *   root    bash /vagrant/sitemap.sh' /etc/crontab) > /etc/crontab
