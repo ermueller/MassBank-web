@@ -101,6 +101,7 @@ apt-get install -y mc xterm mysql-workbench
 
 # download latest version of MassBank
 git clone https://github.com/ermueller/MassBank-web
+git checkout testbranch
 
 # Compile and Copy MassBank components
 
